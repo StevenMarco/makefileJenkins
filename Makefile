@@ -21,7 +21,7 @@ $(EXEC): $(OBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Roda testes (simulação)
-testsrun:
+tests_run:
 	@echo "Executando testes..."
 	@echo "Teste 1: OK"
 	@echo "Teste 2: OK"
