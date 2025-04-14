@@ -1,22 +1,40 @@
-NAME    = my_program
-SRC     = main.c
-OBJ     = $(SRC:.c=.o)
-CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror
+# Compilador (simulado) by Luiza
+CC = gcc
 
-all: $(NAME)
+# Flags (exemplo)
+CFLAGS = -Wall -Wextra -Werror
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+# Arquivos fictícios
+SRC = main.c
+OBJ = $(SRC:.c=.o)
+EXEC = app
 
+# Alvo padrão
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
+    @echo "Compilando $@ ..."
+    @$(CC) $(OBJ) -o $(EXEC)
+
+%.o: %.c
+    @echo "Compilando $< ..."
+    @$(CC) $(CFLAGS) -c $< -o $@
+
+# Roda testes (simulação)
+testsrun:
+    @echo "Executando testes..."
+    @echo "Teste 1: OK"
+    @echo "Teste 2: OK"
+
+# Limpeza dos objetos
 clean:
-	rm -f $(OBJ)
+    @echo "Limpando arquivos objeto..."
+    @rm -f $(OBJ)
 
+# Limpeza total
 fclean: clean
-	rm -f $(NAME)
+    @echo "Limpando executável..."
+    @rm -f $(EXEC)
 
-tests_run:
-	@echo "Running fake tests..."
-	@echo "Tests passed ✔️"
-
+# Recompila do zero
 re: fclean all
